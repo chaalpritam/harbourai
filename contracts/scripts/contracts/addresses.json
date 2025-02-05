@@ -1,0 +1,9 @@
+{
+    "network":"arbitrumSepolia",
+    "contractAddresses":{
+        "DAO_TOKEN":"0x7795D2fCA52397FA0d5AB3e4ff61914dc1C35243",
+        "TIMELOCK":"0x3A3fF7446EbC483BC64659e994938570FC7A96fe",
+        "DAO_GOVERNOR":"0xF0482607133e4d091f6cc9F75dD4C579a6ecEA4e",
+        "TARGET_CONTRACT":"0x248D0ED415b1a2945e5F07c051e53Ac35e9eA3E1"
+    }
+}
