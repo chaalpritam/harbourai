@@ -1,1 +1,1 @@
-# Harbour AI Agent | Build your Social DAO
+# Harbour AI Agent
