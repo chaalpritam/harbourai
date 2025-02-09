@@ -6,9 +6,6 @@ import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Bot, Send, User } from "lucide-react"
 
-import { Web3Provider } from '@/utils/Web3Provider'
-import { ConnectKitButton } from "connectkit"
-
 interface Message {
   _id?: string
   role: "user" | "assistant"
@@ -25,10 +22,6 @@ interface Thread {
 }
 
 export default function Home() {
-  return <Web3Provider><V0LikeUI /></Web3Provider>
-}
-
-export function V0LikeUI() {
   const [messages, setMessages] = useState<Message[]>([])
   const [threads, setThreads] = useState<Thread[]>([])
   const [input, setInput] = useState("")
@@ -117,7 +110,6 @@ export function V0LikeUI() {
       {/* Top Navigation Bar */}
       <div className="p-2  border-b flex justify-between items-center">
         <h2 className="text-lg font-semibold">Harbour AI</h2>
-        <ConnectKitButton />
       </div>
       <div className="flex bg-background">
         {/* Sidebar */}
