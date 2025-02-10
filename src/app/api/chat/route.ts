@@ -1,8 +1,8 @@
 import OpenAI from "openai";
-import { createAssistant } from "../../../lib/openai/createAssistant";
-import { createThread } from "../../../lib/openai/createThread";
-import { createRun } from "../../../lib/openai/createRun";
-import { performRun } from "../../../lib/openai/performRuns";
+import { createAssistant } from "../../../lib/openai/createassistant";
+import { createThread } from "../../../lib/openai/createthread";
+import { createRun } from "../../../lib/openai/createrun";
+import { performRun } from "../../../lib/openai/performruns";
 
 const client = new OpenAI();
 

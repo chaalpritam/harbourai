@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import dbConnect from "../../../database/mongodb"
-import { Message } from "../../../database/Message"
+import { Message } from "../../../database/message"
 import crypto from "crypto"
 
 export async function GET() {
