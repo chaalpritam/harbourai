@@ -28,7 +28,7 @@ export default function Chat() {
   return <Web3Provider><ChatUI /></Web3Provider>
 }
 
-export function ChatUI() {
+function ChatUI() {
   const [messages, setMessages] = useState<Message[]>([])
   const [threads, setThreads] = useState<Thread[]>([])
   const [input, setInput] = useState("")
