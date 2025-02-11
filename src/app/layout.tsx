@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import './fonts/fonts.css';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,6 +12,11 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const neueMachina = {
+  variable: "--font-neue-machina",
+  fontFamily: "Neue Machina, sans-serif",
+};
 
 export const metadata: Metadata = {
   title: "Harbour Agent",
@@ -25,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${neueMachina.variable} antialiased`}
       >
         {children}
       </body>
