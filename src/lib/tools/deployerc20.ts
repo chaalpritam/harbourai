@@ -1,6 +1,6 @@
 import type { ToolConfig } from "./alltools";
 import { createViemWalletClient } from "../viem/createviemwalletclient";
-import { ERC20_ABI, ERC20_BYTECODE } from "../contracts/erc20";
+import { ERC20_ABI, ERC20_BYTECODE } from "../onchain/erc20";
 import { createViemPublicClient } from "../viem/createviewpublicclinet";
 
 /**

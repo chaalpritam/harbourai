@@ -1,6 +1,6 @@
 import type { ToolConfig } from "./alltools";
 import { createViemWalletClient } from "../viem/createviemwalletclient";
-import { DaoTimelock_ABI, DaoTimelock_BYTECODE } from "../contracts/daotimelock";
+import { DaoTimelock_ABI, DaoTimelock_BYTECODE } from "../onchain/daotimelock";
 import { createViemPublicClient } from "../viem/createviewpublicclinet";
 
 /**
