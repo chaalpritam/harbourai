@@ -6,6 +6,9 @@ import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Bot, Send, User } from "lucide-react"
 
+import { Web3Provider } from '@/utils/web3provider'
+import { ConnectKitButton } from "connectkit"
+
 interface Message {
   _id?: string
   role: "user" | "assistant"
@@ -22,6 +25,10 @@ interface Thread {
 }
 
 export default function Chat() {
+  return <Web3Provider><ChatUI /></Web3Provider>
+}
+
+export function ChatUI() {
   const [messages, setMessages] = useState<Message[]>([])
   const [threads, setThreads] = useState<Thread[]>([])
   const [input, setInput] = useState("")
@@ -110,6 +117,7 @@ export default function Chat() {
       {/* Top Navigation Bar */}
       <div className="p-2  border-b flex justify-between items-center">
         <h2 className="text-lg font-semibold">Harbour AI</h2>
+        <ConnectKitButton />
       </div>
       <div className="flex bg-background">
         {/* Sidebar */}
