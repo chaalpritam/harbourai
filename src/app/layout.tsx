@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import localFont from 'next/font/local';
 import "./globals.css";
-import './fonts/fonts.css';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,10 +13,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const neueMachina = {
-  variable: "--font-neue-machina",
-  fontFamily: "Neue Machina, sans-serif",
-};
+const neueMachina = localFont({
+  src: [
+    {
+      path: './fonts/NeueMachina-Regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/NeueMachina-Light.otf',
+      weight: '300',
+      style: 'light',
+    },
+    {
+      path: './fonts/NeueMachina-Ultrabold.otf',
+      weight: '800',
+      style: 'bold',
+    },
+  ],
+})
 
 export const metadata: Metadata = {
   title: "Harbour Agent",
@@ -31,7 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${neueMachina.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${neueMachina.className} antialiased`}
       >
         {children}
       </body>
