@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 
 export default function Home() {
   const router = useRouter();
@@ -11,7 +11,7 @@ export default function Home() {
     buttonText: 'Start Your DAO Journey →'
   });
 
-  const handleMouseEnter = (newText: any) => {
+  const handleMouseEnter = (newText: SetStateAction<{ heading: string; paragraph: string; buttonText: string; }>) => {
     setText(newText);
   };
 
