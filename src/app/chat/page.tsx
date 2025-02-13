@@ -8,6 +8,7 @@ import { Bot, Send, User } from "lucide-react"
 
 import { Web3Provider } from '@/utils/web3provider'
 import { ConnectKitButton } from "connectkit"
+import { useAccount } from "wagmi"
 
 interface Message {
   _id?: string
@@ -29,6 +30,7 @@ export default function Chat() {
 }
 
 function ChatUI() {
+  const { isConnected } = useAccount()
   const [messages, setMessages] = useState<Message[]>([])
   const [threads, setThreads] = useState<Thread[]>([])
   const [input, setInput] = useState("")
@@ -119,79 +121,90 @@ function ChatUI() {
         <h2 className="text-lg font-semibold">Harbour AI</h2>
         <ConnectKitButton />
       </div>
-      <div className="flex bg-background">
-        {/* Sidebar */}
-        <div className="w-80 border-r">
-          <ScrollArea className="h-[calc(100vh-60px)]">
-            <div className="p-4 space-y-2">
-              {threads.map((thread) => (
-                <Button
-                  key={thread._id}
-                  variant={threadId === thread._id ? "secondary" : "ghost"}
-                  className="w-full justify-start text-left"
-                  onClick={() => fetchMessagesForThread(thread._id)}
-                >
-                  <div className="flex flex-col w-full overflow-hidden">
-                    <div className="truncate text-sm">
-                      {thread.latestMessage.substring(0, 30)}
-                      {thread.latestMessage.length > 30 ? "..." : ""}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {thread.messageCount} messages • {new Date(thread.timestamp).toLocaleDateString()}
-                    </div>
-                  </div>
-                </Button>
-              ))}
-            </div>
-          </ScrollArea>
-        </div>
-
-        {/* Main Chat Area */}
-        <div className="flex-1 flex flex-col">
-          {/* Chat Messages */}
-          <ScrollArea className="flex-1 p-4">
-            <div className="space-y-4">
-              {messages.map((message, i) => (
-                <div key={message._id || i} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-                  <div
-                    className={`flex items-start space-x-2 ${message.role === "user" ? "flex-row-reverse space-x-reverse" : ""
-                      }`}
+      {isConnected ?
+        <div className="flex bg-background">
+          {/* Sidebar */}
+          <div className="w-80 border-r">
+            <ScrollArea className="h-[calc(100vh-60px)]">
+              <div className="p-4 space-y-2">
+                {threads.map((thread) => (
+                  <Button
+                    key={thread._id}
+                    variant={threadId === thread._id ? "secondary" : "ghost"}
+                    className="w-full justify-start text-left"
+                    onClick={() => fetchMessagesForThread(thread._id)}
                   >
-                    <div
-                      className={`p-2 rounded-lg ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"
-                        }`}
-                    >
-                      {message.role === "user" ? <User className="h-6 w-6" /> : <Bot className="h-6 w-6" />}
+                    <div className="flex flex-col w-full overflow-hidden">
+                      <div className="truncate text-sm">
+                        {thread.latestMessage.substring(0, 30)}
+                        {thread.latestMessage.length > 30 ? "..." : ""}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {thread.messageCount} messages • {new Date(thread.timestamp).toLocaleDateString()}
+                      </div>
                     </div>
+                  </Button>
+                ))}
+              </div>
+            </ScrollArea>
+          </div>
+
+          {/* Main Chat Area */}
+          <div className="flex-1 flex flex-col">
+            {/* Chat Messages */}
+            <ScrollArea className="flex-1 p-4">
+              <div className="space-y-4">
+                {messages.map((message, i) => (
+                  <div key={message._id || i} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
                     <div
-                      className={`p-2 rounded-lg ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"
+                      className={`flex items-start space-x-2 ${message.role === "user" ? "flex-row-reverse space-x-reverse" : ""
                         }`}
                     >
-                      {message.content}
+                      <div
+                        className={`p-2 rounded-lg ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"
+                          }`}
+                      >
+                        {message.role === "user" ? <User className="h-6 w-6" /> : <Bot className="h-6 w-6" />}
+                      </div>
+                      <div
+                        className={`p-2 rounded-lg ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"
+                          }`}
+                      >
+                        {message.content}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </ScrollArea>
+                ))
+                }
+              </div>
+            </ScrollArea>
 
-          {/* Input Area */}
-          <div className="p-4 border-t">
-            <div className="flex space-x-2">
-              <Input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Type your message here..."
-                onKeyPress={(e) => e.key === "Enter" && handleSend()}
-                disabled={isLoading}
-              />
-              <Button onClick={handleSend} disabled={isLoading}>
-                <Send className="h-4 w-4" />
-              </Button>
+            {/* Input Area */}
+            <div className="p-4 border-t">
+              {isConnected && (
+                <div className="flex space-x-2">
+                  <Input
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="Type your message here..."
+                    onKeyPress={(e) => e.key === "Enter" && handleSend()}
+                    disabled={isLoading}
+                  />
+                  <Button onClick={handleSend} disabled={isLoading}>
+                    <Send className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>
-      </div>
+        : (
+          <div className="flex items-center justify-center h-full">
+            <div className="text-center text-red-500">
+              <h3>Please Connect the wallet to use the agent</h3>
+            </div>
+          </div>
+        )}
     </div>
   )
 }
