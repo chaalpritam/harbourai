@@ -122,8 +122,14 @@ function ChatUI() {
   return (
     <div className="h-screen">
       {/* Top Navigation Bar */}
-      <div className="p-2  border-b flex justify-between items-center">
+      <div className="p-2 border-b flex justify-between items-center">
         <h2 className="text-lg font-semibold">Harbour AI</h2>
+        <div className="flex space-x-4">
+          <Button variant="ghost">Chat</Button>
+          <Button variant="ghost">DAO</Button>
+          <Button variant="ghost">Proposal</Button>
+          <Button variant="ghost">Create Agents</Button>
+        </div>
         <ConnectKitButton />
       </div>
       {isConnected ?
