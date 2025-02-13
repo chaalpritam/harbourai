@@ -7,7 +7,6 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Bot, Send, User } from "lucide-react"
 
 import { Web3Provider } from '@/utils/web3provider'
-import { ConnectKitButton } from "connectkit"
 import { useAccount } from "wagmi"
 
 interface Message {
@@ -122,17 +121,17 @@ function ChatUI() {
   return (
     <div className="h-screen">
       {/* Top Navigation Bar */}
-      <div className="p-2 border-b flex justify-between items-center">
-        <h2 className="text-lg font-semibold">Harbour AI</h2>
-        <div className="flex space-x-4">
-          <Button variant="ghost">Home</Button>
-          <Button variant="ghost">DAO</Button>
-          <Button variant="ghost">Proposal</Button>
-          <Button variant="ghost">Create Agents</Button>
-          <Button variant="ghost">Token</Button>
-        </div>
-        <ConnectKitButton />
-      </div>
+      {/* <div className="p-2 border-b flex justify-between items-center"> */}
+      {/*   <h2 className="text-lg font-semibold">Harbour AI</h2> */}
+      {/*   <div className="flex space-x-4"> */}
+      {/*     <Link href="/home"><Button variant="ghost">Home</Button></Link> */}
+      {/*     <Link href="/home/dao"><Button variant="ghost">DAO</Button></Link> */}
+      {/*     <Link href="/home/proposal"><Button variant="ghost">Proposal</Button></Link> */}
+      {/*     <Link href="/home/agents"><Button variant="ghost">Create Agents</Button></Link> */}
+      {/*     <Link href="/home/token"><Button variant="ghost">Token</Button></Link> */}
+      {/*   </div> */}
+      {/*   <ConnectKitButton /> */}
+      {/* </div> */}
       {isConnected ?
         <div className="flex bg-background">
           {/* Sidebar */}
