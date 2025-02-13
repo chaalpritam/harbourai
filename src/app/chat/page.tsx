@@ -16,6 +16,7 @@ interface Message {
   content: string
   timestamp?: Date
   threadId?: string
+  walletAddress: `0x${string}` | undefined
 }
 
 interface Thread {
@@ -30,7 +31,7 @@ export default function Chat() {
 }
 
 function ChatUI() {
-  const { isConnected } = useAccount()
+  const { isConnected, address } = useAccount()
   const [messages, setMessages] = useState<Message[]>([])
   const [threads, setThreads] = useState<Thread[]>([])
   const [input, setInput] = useState("")
@@ -38,11 +39,13 @@ function ChatUI() {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    fetchThreads()
-  }, [])
+    if (isConnected && address) {
+      fetchThreads()
+    }
+  }, [isConnected, address])
 
   const fetchThreads = async () => {
-    const response = await fetch("/api/messages")
+    const response = await fetch(`/api/messages?walletAddress=${address}`)
     const data = await response.json()
     setThreads(data)
   }
@@ -61,6 +64,7 @@ function ChatUI() {
         role: "user",
         content: input,
         threadId: currentThreadId,
+        walletAddress: address,
         timestamp: new Date()
       }
       setMessages((prev) => [...prev, userMessage])
@@ -91,6 +95,7 @@ function ChatUI() {
             role: "assistant",
             content: data.response,
             threadId: currentThreadId,
+            walletAddress: address,
             timestamp: new Date()
           }
 

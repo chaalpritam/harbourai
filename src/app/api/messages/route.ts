@@ -3,11 +3,20 @@ import dbConnect from "../../../database/mongodb"
 import { Message } from "../../../database/message"
 import crypto from "crypto"
 
-export async function GET() {
+export async function GET(request: Request) {
     await dbConnect()
+    // Get unique threads with their latest message and message count based on walletAddress and threadId
+    const url = new URL(request.url);
+    const walletAddress = url.searchParams.get('walletAddress'); // Extract walletAddress from query parameters
+    if (!walletAddress) {
+        return NextResponse.json(
+            { error: 'WalletAddress and ThreadId are required' },
+            { status: 400 }
+        )
+    }
 
-    // Get unique threads with their latest message and message count
     const threads = await Message.aggregate([
+        { $match: { walletAddress } }, // Filter by walletAddress and threadId
         { $sort: { timestamp: -1 } },
         {
             $group: {
@@ -25,11 +34,18 @@ export async function GET() {
 
 export async function POST(request: Request) {
     try {
-        const { role, content, threadId } = await request.json()
+        const { role, content, threadId, walletAddress } = await request.json()
 
         if (!threadId) {
             return NextResponse.json(
                 { error: 'ThreadId is required' },
+                { status: 400 }
+            )
+        }
+
+        if (!walletAddress) {
+            return NextResponse.json(
+                { error: 'WalletAddress is required' },
                 { status: 400 }
             )
         }
@@ -40,6 +56,7 @@ export async function POST(request: Request) {
             role,
             content,
             threadId,
+            walletAddress,
             timestamp: new Date(),
             messageId: crypto.randomUUID()
         })
