@@ -125,10 +125,11 @@ function ChatUI() {
       <div className="p-2 border-b flex justify-between items-center">
         <h2 className="text-lg font-semibold">Harbour AI</h2>
         <div className="flex space-x-4">
-          <Button variant="ghost">Chat</Button>
+          <Button variant="ghost">Home</Button>
           <Button variant="ghost">DAO</Button>
           <Button variant="ghost">Proposal</Button>
           <Button variant="ghost">Create Agents</Button>
+          <Button variant="ghost">Token</Button>
         </div>
         <ConnectKitButton />
       </div>
