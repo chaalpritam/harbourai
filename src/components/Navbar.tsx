@@ -8,7 +8,7 @@ const Navbar = () => {
     return (
         <Web3Provider>
             <div className="p-2 border-b flex justify-between items-center">
-                <h2 className="text-lg font-semibold">Harbour AI</h2>
+                <h2 className="text-lg font-semibold"><Link href="/">Harbour AI</Link></h2>
                 <div className="flex space-x-4">
                     <Link href="/home"><Button variant="ghost">Home</Button></Link>
                     <Link href="/home/dao"><Button variant="ghost">DAO</Button></Link>
