@@ -39,7 +39,7 @@ export default function Home() {
             buttonText: 'Collaborate Onchain →'
           })} style={{ padding: '14px 30px 13px 30px', margin: 0, float: 'left' }}>Together</li>
         </ul>
-        <button onClick={() => router.push('/chat')} style={{ padding: '14px 0', margin: '0 30px', background: '#FF8A1E', color: '#FFF' }}>
+        <button onClick={() => router.push('/home')} style={{ padding: '14px 0', margin: '0 30px', background: '#FF8A1E', color: '#FFF' }}>
           Goto Agent
         </button>
       </div>
