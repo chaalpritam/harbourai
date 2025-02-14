@@ -37,17 +37,18 @@ function ChatUI() {
   const [threadId, setThreadId] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  useEffect(() => {
-    if (isConnected && address) {
-      fetchThreads()
-    }
-  }, [isConnected, address])
-
   const fetchThreads = async () => {
     const response = await fetch(`/api/messages?walletAddress=${address}`)
     const data = await response.json()
     setThreads(data)
   }
+
+  useEffect(() => {
+    if (isConnected && address) {
+      fetchThreads()
+    }
+  }, [isConnected, address, fetchThreads])
+
 
   const fetchMessagesForThread = async (threadId: string) => {
     const response = await fetch(`/api/messages/${threadId}`)

@@ -22,7 +22,7 @@ interface Token {
 }
 
 export default function Token() {
-    const [tokens, setTokens] = useState<Token[]>([]);
+    const [tokens] = useState<Token[]>([]);
 
     // useEffect(() => {
     //     const fetchTokens = async () => {
